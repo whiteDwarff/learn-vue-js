@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>component</title>
+</head>
+<body>
+    <div id="app">
+        <app-header></app-header>
+        <app-footer/>
+    </div>
+    <div id="app2">
+        <app-header></app-header>
+        <app-footer/>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 전역 component 생성법
+        // instance를 생성하지 않아도 모든 instance에 등록 되어 있음.
+        Vue.component('app-header', {
+            template : '<h1>Header</h1>'
+        });
+
+        // instance를 생성하면 root가 생성된다.
+        var vm = new Vue({
+            el: '#app',
+            // 지역 components 생성법 (객체 리터럴 ) key : value 형식으로 등록 
+            components: {
+                'app-footer' : {
+                    template : '<footer>footer</footer>'
+                }
+            },
+            methods: {
+
+            }
+        });
+
+        var vm = new Vue({
+            el: '#app2',
+            components: {
+                'app-footer': {
+                    template : '<footer>footer</footer>'
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+<!--
+    서비스를 할 때 필요한 로직은 하나가 아니여서 s를 항상 붙인다
+    components, methods ....
+
+
+    component간 데이터 전송 : props, event
+-->
