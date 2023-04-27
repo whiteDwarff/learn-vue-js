@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- poprsdata는 num을 받을거야 ~ -->
+        <app-header :propsdata="num"></app-header>
+        <app-content @pass="deliverNum"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const appHeader = {
+            template : '<div>header</div>',
+            props : ['propsdata']
+        }
+        const appContent = {
+            template : '<div>content<button @click="passNum">PASS</button></div>',
+            methods: {
+                passNum: function() {
+                    this.$emit('pass', 10);
+                }
+            }
+        }
+        /* 
+            같은 레벨에서의 통신은  
+            event 발생 -> 부모 컴포넌트로 데이터 전송 -> props로 데이터 받기
+        */
+        const vm = new Vue({
+            el : '#app',
+            components : {
+                'app-header' : appHeader,
+                'app-content' : appContent
+            },
+            data : {
+                num : 0
+            },
+            methods : {
+                deliverNum : function(value) {
+                    this.num = value;
+            }
+        }
+        })
+    </script>
+</body>
+</html>
