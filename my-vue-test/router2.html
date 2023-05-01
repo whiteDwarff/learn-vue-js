@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- page의 url이 변경됬을 때 뿌려지는 vue : router-view -->
+        <!-- vue instance와 router instance를 연결해서 사용 -->
+        <div>
+            <!-- <router-link> : html 내에서 <a> 태그로 변환되어 출력됨 -->
+            <!-- router 내에서 페이지 이동을 위한 tag -->
+            <router-link to="/login">Login</router-link>
+            <router-link to="/main">Main</router-link>
+            <!-- url에 따른 컴포넌트가 화면에 그려지는 영역 -->
+            <router-view></router-view>
+        </div>
+    </div>  
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+
+    <script>
+        const loginComponent = {
+            template : '<div>login<div>'
+        }
+        const mainComponent = {
+            template : '<div>main<div>'
+        }
+
+        const router = new VueRouter({
+            mode: 'history',
+            // 페이지의 라우팅 정보(어떤 url로 이동했을 때 어떤 페이지가 뿌려지는가 ~ 배열로 들어감)가 들어감
+            // path : 페이지의 정보, component : url로 이동했을 때 출력되는 페이지의 components 정보
+            routes : [
+                // 페이지의 개수만큼 필요
+                {
+                    // 페이지의 url
+                    path: '/login',
+                    name: 'login',
+                    // 해당 url에서 표시될 component
+                    component: loginComponent
+                },
+                {
+                    path : '/main',
+                    component : mainComponent
+                }
+            ]
+
+        });
+
+        new Vue({
+            el : '#app',
+            // Vue의 속성, 변수를 선언하고, 속성을 연결한다 ~
+            router : router,
+        });
+    </script>
+
+</body>
+</html>

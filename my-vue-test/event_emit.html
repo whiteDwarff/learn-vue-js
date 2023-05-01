@@ -12,6 +12,7 @@
         <!-- v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위 컴포넌트의 메서드 이름" -->
         <app-header @pass="logText"></app-header>
         <app-content @increase="increaseNum"></app-content>
+        <app-main @minus="minusNum"></app-main>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -19,6 +20,7 @@
         const appHeader = {
             template : '<button @click="passEvent">Click Me!!</button>',
             methods: {
+                // pass는 event의 이름이다. 
                 passEvent: function() {
                     this.$emit('pass');
                 },
@@ -32,11 +34,20 @@
                 }
             }
         }
+        const appMain = {
+            template : '<button @click="minus">minis</button>',
+            methods : {
+                minus: function() {
+                    this.$emit('minus')
+                }
+            }
+        }
         var vm = new Vue({
             el: '#app',
             components: {
                 'app-header': appHeader,
                 'app-content': appContent,
+                'app-main': appMain,
             },
             methods: {
                 logText: function() {
@@ -44,6 +55,9 @@
                 },
                 increaseNum: function() {
                     this.num += 1;
+                },
+                minusNum: function() {
+                    this.num -= 1;
                 }
             },
             data: {
