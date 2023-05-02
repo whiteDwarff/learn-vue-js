@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{ num }}
+        <!-- <button @click="addNum">increase</button> -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el : '#app',
+            data : {
+                num : 10,
+            },
+            // 데이터의 변화에 따라 특정 로직을 실행하는 속성
+            // 데이터의 요청에 적합함 ( axios, jquery.... )
+            watch: {
+                num: function(newValue, oldValue) {
+                    this.fetchUserByNumber(newValue);
+                }
+            },
+            // 데이터의 속성의 변화에 따라 특정 로직을 실행
+            // !!!!! 인자를 받지 않는다.
+            // 데이터의 의존성, 로직이 실행될 때 기준이 되는 값이 data내에 있음.
+            // 단순한 텍스트의 입력을 받아 실행되는 로직 ( 가볍다 ), 대부분의 코드에 적합함
+            computed: {
+                doubleNum : function() {
+                    return this.num * 2;
+                }
+            },
+            methods: {
+                fetchUserByNumber : function(num) {
+                    console.log(num);
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>
