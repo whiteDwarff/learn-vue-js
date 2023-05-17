@@ -1,0 +1,12 @@
+components :
+    코드의 재사용 
+
+component 통신 : 
+    - props : 상위 component에서 하위 component로 데이터 통신
+    - event emit : 하위 -> 상위
+
+HTTP 통신 라이브러리 (axios)
+
+템플릿 문법
+    - 데이터 바인딩 {{}} 
+    - 뷰 디렉티브 (v-on, v-if...v-on)
